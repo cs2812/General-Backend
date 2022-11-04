@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     password: String
 })
 
-const User = new mongoose.model("tmetric", userSchema)  //tuser is collection, it will become plural.
+const User = new mongoose.model("general", userSchema)  //tuser is collection, it will become plural.
 
 app.get('/', async(req, res) => {
     const act=await User.find()
