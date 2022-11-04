@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+const port=9004;
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded())
@@ -66,12 +67,16 @@ app.post("/signup", (req, res)=> {
     })   
 }) 
 
+app.listen(process.env.PORT || port,async()=>{
+    await mongoose.connect(`mongodb+srv://chetan:12345@cluster0.4jf6kcr.mongodb.net/?retryWrites=true&w=majority`)
+    console.log(`App start on ${port}`)
+})
 
-app.listen(process.env.PORT || 9004, () => {
-    mongoose.connect("mongodb+srv://chetan:12345@cluster0.4jf6kcr.mongodb.net/?retryWrites=true&w=majority", {   //tmetriclogin is DB
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}, () => {
-    console.log("DB connected at port 9002")
-})
-})
+// app.listen(9002, () => {
+//     mongoose.connect("mongodb://localhost:27017/tmetriclogin", {   //tmetriclogin is DB
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// }, () => {
+//     console.log("DB connected at port 9002")
+// })
+// })
